@@ -22,7 +22,11 @@ jobs:
       - name: Construir a imagem da aplicação
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/docker-commerce:v1_alpine .
 
+      - name: Subir os containeres app e mongo
+        run: docker-compose up --build
+        
       - name: Empurrar imagem
         run: docker push ${{ secrets.DOCKER_USERNAME }}/docker-commerce:v1_alpine
 
-        
+
+
