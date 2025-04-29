@@ -24,3 +24,5 @@ jobs:
 
       - name: Empurrar imagem
         run: docker push ${{ secrets.DOCKER_USERNAME }}/docker-commerce:v1_alpine
+
+        
