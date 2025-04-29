@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    networks:
+      - commerce
+    volumes:
+      - mongo_data:/data/db
+
+  app:
+    build:
+      context: .
+    container_name: docker-commerce
+    ports:
+      - "8000:5000"
+    volumes:
+      - .:/src
+    environment:
+      - MONGODB_URI=mongodb://mongo_db:27017/commerce
+    networks:
+      - commerce
+    depends_on:
+      - mongo
+
+networks:
+  commerce:
+
+volumes:
+  mongo_data:
